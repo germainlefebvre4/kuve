@@ -52,16 +52,54 @@ func (m *Manager) GetStableVersion() (string, error) {
 }
 
 // ListRemoteVersions fetches available kubectl versions
-// Note: This is a simplified implementation. In production, you might want to
-// scrape the kubernetes release page or use the GitHub API
+// Returns the last 10 stable versions from GitHub releases
 func (m *Manager) ListRemoteVersions() ([]string, error) {
-	// For now, we'll return a note that this requires GitHub API or web scraping
-	stableVersion, err := m.GetStableVersion()
+	// Fetch releases from GitHub API
+	resp, err := http.Get("https://api.github.com/repos/kubernetes/kubernetes/releases?per_page=50")
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to fetch releases from GitHub: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("GitHub API returned status %d", resp.StatusCode)
 	}
 
-	return []string{stableVersion}, nil
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read response: %w", err)
+	}
+
+	// Parse JSON response
+	var releases []struct {
+		TagName    string `json:"tag_name"`
+		Draft      bool   `json:"draft"`
+		Prerelease bool   `json:"prerelease"`
+	}
+
+	if err := json.Unmarshal(body, &releases); err != nil {
+		return nil, fmt.Errorf("failed to parse releases: %w", err)
+	}
+
+	// Filter and collect stable versions (exclude pre-releases, drafts, and RC versions)
+	versions := []string{}
+	versionRegex := regexp.MustCompile(`^v\d+\.\d+\.\d+$`)
+
+	for _, release := range releases {
+		if !release.Draft && !release.Prerelease && versionRegex.MatchString(release.TagName) {
+			versions = append(versions, release.TagName)
+			if len(versions) == 10 {
+				break
+			}
+		}
+	}
+
+	// Sort versions in descending order (newest first)
+	sort.Slice(versions, func(i, j int) bool {
+		return versions[i] > versions[j]
+	})
+
+	return versions, nil
 }
 
 // ListInstalledVersions lists all locally installed kubectl versions

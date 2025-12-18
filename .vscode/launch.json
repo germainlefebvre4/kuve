@@ -9,8 +9,10 @@
             "cwd": "${workspaceFolder}",
             "program": "main.go",
             "args": [
-                "use",
-                "-c"
+                // "use",
+                // "-c"
+                "list",
+                "remote",
             ],
             "debugAdapter": "dlv-dap",
             "env": {

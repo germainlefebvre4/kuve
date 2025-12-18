@@ -26,14 +26,21 @@ var listRemoteCmd = &cobra.Command{
 
 		manager := version.NewManager(cfg)
 
-		// Get stable version (simplified implementation)
-		stableVersion, err := manager.GetStableVersion()
+		remoteVersions, err := manager.ListRemoteVersions()
 		if err != nil {
-			return fmt.Errorf("failed to get stable version: %w", err)
+			return fmt.Errorf("failed to list remote versions: %w", err)
 		}
 
-		fmt.Println("Latest stable version:")
-		fmt.Printf("  %s\n", stableVersion)
+		if len(remoteVersions) == 0 {
+			fmt.Println("No remote versions available.")
+			return nil
+		}
+
+		fmt.Println("Last 10 stable kubectl versions:")
+		for _, v := range remoteVersions {
+			fmt.Printf("  %s\n", v)
+		}
+
 		fmt.Println("\nNote: For a full list of versions, visit https://github.com/kubernetes/kubernetes/releases")
 
 		return nil
