@@ -5,11 +5,11 @@ on:
   pull_request:
     branches:
       - main
-    paths:
-      - 'internal/**'
-      - 'cmd/**'
-      - 'go.mod'
-      - 'go.sum'
+    # paths:
+    #   - 'internal/**'
+    #   - 'cmd/**'
+    #   - 'go.mod'
+    #   - 'go.sum'
 
 jobs:
   build:
