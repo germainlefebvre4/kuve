@@ -67,6 +67,25 @@ build-all:
 	GOOS=darwin GOARCH=arm64 $(GO) build -o $(BINARY_NAME)-darwin-arm64 main.go
 	@echo "Multi-platform build complete"
 
+# Docker build and push
+docker-build:
+	@echo "Building Docker image..."
+	docker build -t germainlefebvre4/kuve:dev .
+	@echo "Docker image built: kuve:dev"
+
+# 
+docker-build-push: docker-build
+	docker push germainlefebvre4/kuve:dev
+	@echo "Docker image pushed: germainlefebvre4/kuve:dev"
+
+# Goreleaser targets
+goreleser-check:
+	goreleaser check
+
+# Goreleaser release (snapshot)
+goreleser-release:
+	goreleaser release --snapshot --clean
+
 # Display help
 help:
 	@echo "Available targets:"

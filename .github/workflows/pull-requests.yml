@@ -34,7 +34,7 @@ jobs:
 
       - name: Build
         run: |
-          go build -v -o kuve ./main.go
+          go build -v -ldflags="-X 'github.com/germainlefebvre4/kuve/cmd.appVersion=${{ github.sha }}'" -o kuve ./main.go
           echo "Build completed."
 
       - name: Test with the Go CLI

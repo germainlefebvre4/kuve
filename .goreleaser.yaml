@@ -11,16 +11,16 @@ before:
     - go mod tidy
 
 builds:
-  - main: ./cmd/{{ .ProjectName }}/main.go
+  - main: ./main.go
     env:
       - CGO_ENABLED=0
     goos:
       - linux
-      - windows
-      - darwin
+      # - windows
+      # - darwin
 
 archives:
-  - format: binary
+  - formats: "tar.gz"
     name_template: >-
       {{- .ProjectName }}_
       {{- .Os }}_

@@ -32,21 +32,11 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
 
-      - name: Update binary version
-        shell: bash
-        run: |
-          sed -i 's/\(var KUVE_VERSION =\).*/\1 "${{ github.ref_name }}"/' internal/version/version.go
-
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "germain.lefebvre4@gmail.com"
-          git add internal/version/version.go
-          git commit -m "chore: update version to ${{ github.ref_name }}" || echo "No changes to commit"
-
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
         with:
           distribution: goreleaser
-          version: latest
+          version: ${{ github.ref_name }}
           args: release --clean --skip=validate
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
