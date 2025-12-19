@@ -1,0 +1,32 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: mixed-line-ending
+        args: ['--fix=lf']
+      - id: check-added-large-files
+        args: ['--maxkb=500']
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.12.0
+    hooks:
+      - id: hadolint-docker
+  - repo: local
+    hooks:
+      - id: mockery
+        name: mockery
+        entry: bash -c 'mockery'
+        language: system
+        verbose: false
+      - id: cli-helper
+        name: cli-helper
+        entry: bash -c 'go run ./main.go > docs/github-pages/static/helper.out'
+        language: system
+        verbose: true
+      # - id: kuve-documentation
+      #   name: kuve-documentation
+      #   entry: bash -c 'cd docs/github-pages && pnpm build'
+      #   language: system
+      #   verbose: false
