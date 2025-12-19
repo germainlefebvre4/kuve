@@ -251,15 +251,31 @@ kuve/
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit a Pull Request. See the [Contributing Guide](CONTRIBUTING.md) for details.
 
 ## Documentation
 
-- [Quick Start Guide](QUICKSTART.md) - Get started quickly
+### Getting Started
+- [Quick Start Guide](QUICKSTART.md) - Get started in minutes
+- [Installation Guide](docs/installation.md) - Complete installation instructions
+- [Usage Guide](docs/usage.md) - Comprehensive usage documentation
+
+### Features
 - [Cluster Detection](CLUSTER_DETECTION.md) - Auto-detect cluster versions
 - [Shell Integration](SHELL_INTEGRATION.md) - Auto-switching setup
+- [Version Files](docs/usage.md#version-files) - Project-specific versions
+
+### Reference
+- [CLI Reference](docs/cli-reference.md) - All commands and options
+- [Configuration](docs/configuration.md) - Configuration and customization
+- [Troubleshooting](docs/troubleshooting.md) - Common issues and solutions
+
+### Development
+- [Architecture](docs/architecture.md) - System design and architecture
 - [Development Guide](DEVELOPMENT.md) - Developer documentation
 - [Contributing Guide](CONTRIBUTING.md) - How to contribute
+
+📚 **[Full Documentation Index](docs/README.md)** - Browse all documentation
 
 ## License
 

@@ -21,3 +21,9 @@ CLI to easily switch version of kubectl.
 
 - Name: Kuve
 - Description: Kubernetes Client Switcher
+
+## Documentation
+
+- README.md file in the root of the repository
+- Documentation directory: docs/
+- Do not write documentation in root directory except README.md
