@@ -1,63 +1,54 @@
-name: Release
+---
+name: Go Release
 
 on:
   push:
     tags:
-      - 'v*'
+      - '*'
 
 permissions:
   contents: write
 
 jobs:
-  release:
-    name: Create Release
+  pkggodev:
     runs-on: ubuntu-latest
-    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - name: Set up Go
-      uses: actions/setup-go@v5
-      with:
-        go-version: '1.25'
+      - name: Update pkg.go.dev endpoint
+        run: curl "https://proxy.golang.org/github.com/germainlefebvre4/kuve/@v/${{ github.ref_name }}.info"
 
-    - name: Run tests
-      run: go test -v ./...
+  goreleaser:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - name: Build for multiple platforms
-      run: |
-        mkdir -p dist
-        
-        # Linux amd64
-        GOOS=linux GOARCH=amd64 go build -ldflags="-X 'github.com/germainlefebvre4/kuve/cmd.appVersion=${{ github.ref_name }}'" -o dist/kuve-linux-amd64 main.go
-        
-        # Linux arm64
-        GOOS=linux GOARCH=arm64 go build -ldflags="-X 'github.com/germainlefebvre4/kuve/cmd.appVersion=${{ github.ref_name }}'" -o dist/kuve-linux-arm64 main.go
-        
-        # macOS amd64
-        GOOS=darwin GOARCH=amd64 go build -ldflags="-X 'github.com/germainlefebvre4/kuve/cmd.appVersion=${{ github.ref_name }}'" -o dist/kuve-darwin-amd64 main.go
-        
-        # macOS arm64
-        GOOS=darwin GOARCH=arm64 go build -ldflags="-X 'github.com/germainlefebvre4/kuve/cmd.appVersion=${{ github.ref_name }}'" -o dist/kuve-darwin-arm64 main.go
-        
-        # Calculate checksums
-        cd dist
-        sha256sum * > checksums.txt
+      - name: Set up Go
+        uses: actions/setup-go@v5
 
-    - name: Create Release
-      uses: softprops/action-gh-release@v1
-      with:
-        files: |
-          dist/kuve-linux-amd64
-          dist/kuve-linux-arm64
-          dist/kuve-darwin-amd64
-          dist/kuve-darwin-arm64
-          dist/checksums.txt
-        draft: false
-        prerelease: false
-        generate_release_notes: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v6
+        with:
+          distribution: goreleaser
+          version: ${{ github.ref_name }}
+          args: release --clean --skip=validate
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+
+      - name: Upload assets
+        uses: actions/upload-artifact@v4
+        with:
+            name: kuve
+            path: dist/*
+
+  docker-publish:
+    uses: ./.github/workflows/docker-publish.yml
+    with:
+      version: ${{ github.ref_name }}
+    secrets: inherit

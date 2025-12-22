@@ -312,9 +312,9 @@ func (m *Manager) getServerVersionFallback(kubectlPath string) (string, error) {
 // normalizeClusterVersion extracts the base kubectl version from cluster version
 // Examples:
 //
-//	v1.33.5-gke.1308000 -> v1.33.0
-//	v1.28.3-eks-123456 -> v1.28.0
-//	v1.27.5 -> v1.27.0
+//	v1.33.5-gke.1308000 -> v1.33.5
+//	v1.28.3-eks-123456 -> v1.28.3
+//	v1.27.5 -> v1.27.5
 func normalizeClusterVersion(clusterVersion string) string {
 	// Remove leading/trailing whitespace
 	clusterVersion = strings.TrimSpace(clusterVersion)
@@ -331,8 +331,7 @@ func normalizeClusterVersion(clusterVersion string) string {
 	major := matches[1]
 	minor := matches[2]
 	patch := matches[3]
-	// Use patch 0 for kubectl binary (kubectl binaries use .0 for minor releases)
 
-	// Return base version in format vMAJOR.MINOR.0
+	// Return base version in format vMAJOR.MINOR.PATCH (without suffixes)
 	return fmt.Sprintf("v%s.%s.%s", major, minor, patch)
 }

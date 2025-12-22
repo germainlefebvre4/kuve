@@ -223,37 +223,37 @@ func TestNormalizeClusterVersion(t *testing.T) {
 		{
 			name:  "GKE version with build suffix",
 			input: "v1.33.5-gke.1308000",
-			want:  "v1.33.0",
+			want:  "v1.33.5",
 		},
 		{
 			name:  "EKS version with suffix",
 			input: "v1.28.3-eks-123456",
-			want:  "v1.28.0",
+			want:  "v1.28.3",
 		},
 		{
 			name:  "AKS version with suffix",
 			input: "v1.27.5-aks-20231015",
-			want:  "v1.27.0",
+			want:  "v1.27.5",
 		},
 		{
 			name:  "Standard version without suffix",
 			input: "v1.29.2",
-			want:  "v1.29.0",
+			want:  "v1.29.2",
 		},
 		{
 			name:  "Version with plus suffix",
 			input: "v1.26.8+k3s1",
-			want:  "v1.26.0",
+			want:  "v1.26.8",
 		},
 		{
 			name:  "Version without v prefix",
 			input: "1.25.4-gke.1000",
-			want:  "v1.25.0",
+			want:  "v1.25.4",
 		},
 		{
 			name:  "Version with spaces",
 			input: "  v1.30.1-custom  ",
-			want:  "v1.30.0",
+			want:  "v1.30.1",
 		},
 	}
 
