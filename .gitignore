@@ -29,3 +29,6 @@ kuve
 # OS specific files
 .DS_Store
 Thumbs.db
+
+# Docmentation
+node_modules/
