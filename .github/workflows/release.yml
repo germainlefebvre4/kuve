@@ -31,12 +31,14 @@ jobs:
 
       - name: Set up Go
         uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
         with:
           distribution: goreleaser
-          version: ${{ github.ref_name }}
+          version: '~> v2'
           args: release --clean --skip=validate
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
