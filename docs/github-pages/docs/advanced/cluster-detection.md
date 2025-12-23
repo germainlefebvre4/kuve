@@ -436,5 +436,4 @@ Potential improvements (not yet implemented):
 ## Next Steps
 
 - Try it: `kuve use --from-cluster`
-- Read: [Shell Integration](./shell-integration) for automation
 - Explore: [Workflows](../user-guide/workflows) for advanced patterns
