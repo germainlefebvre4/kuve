@@ -32,3 +32,6 @@ Thumbs.db
 
 # Docmentation
 node_modules/
+
+# Nektos/act
+/.act.*
