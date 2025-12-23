@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/germainlefebvre4/kuve/compare/v0.2.0...v0.2.1) (2025-12-23)
+
+
+### Bug Fixes
+
+* Update dockerhub description ([#6](https://github.com/germainlefebvre4/kuve/issues/6)) ([af0623e](https://github.com/germainlefebvre4/kuve/commit/af0623ea8e435b875f405b4a5dbea2092a644640))
+
 ## [0.2.0](https://github.com/germainlefebvre4/kuve/compare/v0.1.0...v0.2.0) (2025-12-23)
 
 
