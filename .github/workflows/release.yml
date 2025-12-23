@@ -49,8 +49,8 @@ jobs:
             name: kuve
             path: dist/*
 
-  # docker-publish:
-  #   uses: ./.github/workflows/docker-publish.yml
-  #   with:
-  #     version: ${{ github.ref_name }}
-  #   secrets: inherit
+  docker-publish:
+    uses: ./.github/workflows/docker-publish.yml
+    with:
+      version: ${{ github.ref_name }}
+    secrets: inherit
