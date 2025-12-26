@@ -28,7 +28,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'User Guide',
-      collapsed: false,
+      collapsed: true,
       items: [
         'user-guide/basic-usage',
         'user-guide/managing-versions',
@@ -39,7 +39,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Advanced Features',
-      collapsed: false,
+      collapsed: true,
       items: [
         'advanced/cluster-detection',
         'advanced/version-normalization',
@@ -48,7 +48,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Reference',
-      collapsed: false,
+      collapsed: true,
       items: [
         'reference/cli',
         'reference/commands',

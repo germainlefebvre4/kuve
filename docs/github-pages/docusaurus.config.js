@@ -69,6 +69,11 @@ const config = {
             label: 'Documentation',
           },
           {
+            href: 'https://github.com/germainlefebvre4/kuve/releases',
+            label: 'Releases',
+            position: 'left',
+          },
+          {
             href: 'https://github.com/germainlefebvre4/kuve',
             label: 'GitHub',
             position: 'right',
