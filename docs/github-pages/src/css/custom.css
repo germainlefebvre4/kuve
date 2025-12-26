@@ -49,3 +49,141 @@
   color: #ffffff;
   border-color: var(--ifm-color-primary);
 }
+
+/* Minimalist Sidebar Styling - Vercel-inspired */
+.theme-doc-sidebar-container {
+  border-right: 1px solid var(--ifm-toc-border-color) !important;
+  background-color: transparent !important;
+}
+
+/*
+.menu {
+  padding: 1 !important;
+}
+*/
+
+.menu__list {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Clean sidebar items */
+.theme-doc-sidebar-item-category,
+.theme-doc-sidebar-item-link {
+  margin: 0 !important;
+}
+
+.menu__link {
+  padding: 0.375rem 0.75rem !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  line-height: 1.5 !important;
+  transition: all 0.15s ease !important;
+  color: var(--ifm-font-color-base) !important;
+}
+
+.menu__link:hover {
+  background-color: transparent !important;
+  color: var(--ifm-color-primary) !important;
+}
+
+.menu__link--active {
+  background-color: transparent !important;
+  color: var(--ifm-color-primary) !important;
+  font-weight: 500 !important;
+  border-left: 2px solid var(--ifm-color-primary) !important;
+  padding-left: calc(0.75rem - 2px) !important;
+}
+
+/* Category styling */
+.menu__list-item-collapsible {
+  margin: 0 !important;
+}
+
+.menu__link--sublist {
+  font-weight: 500 !important;
+  color: var(--ifm-font-color-base) !important;
+  padding: 0.5rem 0.75rem !important;
+  letter-spacing: 0.025em !important;
+  margin-top: 1rem !important;
+}
+
+.menu__link--sublist:first-child {
+  margin-top: 0 !important;
+}
+
+.menu__link--sublist:hover {
+  background-color: transparent !important;
+  color: var(--ifm-font-color-base) !important;
+}
+
+.menu__link--sublist::after {
+  width: 0.8rem !important;
+  height: 0.8rem !important;
+  opacity: 0.9 !important;
+  background-size: 1rem !important;
+}
+
+/* Nested items */
+.menu__list .menu__list {
+  margin-top: 0.25rem !important;
+  margin-bottom: 0.5rem !important;
+  padding-left: 0 !important;
+}
+
+.menu__list .menu__list .menu__link {
+  padding-left: 1.5rem !important;
+}
+
+.menu__list .menu__list .menu__link--active {
+  padding-left: calc(1.5rem - 2px) !important;
+}
+
+/* Remove caret icon for cleaner look */
+.menu__caret {
+  display: none !important;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .menu__link {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+[data-theme='dark'] .menu__link:hover {
+  color: var(--ifm-color-primary-lighter) !important;
+}
+
+[data-theme='dark'] .menu__link--active {
+  color: var(--ifm-color-primary-lighter) !important;
+}
+
+[data-theme='dark'] .menu__link--sublist {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+[data-theme='dark'] .menu__link--sublist:hover {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Sidebar scrollbar styling */
+.theme-doc-sidebar-container aside {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+.theme-doc-sidebar-container aside::-webkit-scrollbar {
+  width: 4px;
+}
+
+.theme-doc-sidebar-container aside::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.theme-doc-sidebar-container aside::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+}
+
+[data-theme='dark'] .theme-doc-sidebar-container aside::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
