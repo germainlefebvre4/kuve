@@ -70,7 +70,7 @@ build-all:
 # Docker build and push
 docker-build:
 	@echo "Building Docker image..."
-	docker build -t germainlefebvre4/kuve:dev .
+	docker build -t germainlefebvre4/kuve:dev --no-cache .
 	@echo "Docker image built: kuve:dev"
 
 # 
