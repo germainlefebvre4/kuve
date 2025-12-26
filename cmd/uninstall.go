@@ -12,7 +12,7 @@ var uninstallCmd = &cobra.Command{
 	Use:   "uninstall <version>",
 	Short: "Uninstall a specific kubectl version",
 	Long: `Remove a specific kubectl version from your system.
-	
+
 Example:
   kuve uninstall v1.28.0
   kuve uninstall 1.28.0`,

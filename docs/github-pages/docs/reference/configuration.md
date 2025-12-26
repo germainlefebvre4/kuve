@@ -243,7 +243,7 @@ Each user has independent installations.
 ```yaml
 env:
   KUVE_VERSION: "latest"
-  
+
 steps:
   - name: Setup Kuve
     run: |

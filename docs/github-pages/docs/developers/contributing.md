@@ -68,7 +68,7 @@ When suggesting features:
 ## Feature: Support for version constraints
 
 **Use Case:**
-As a developer, I want to specify version ranges (e.g., ">=1.28.0, &lt;1.30.0") 
+As a developer, I want to specify version ranges (e.g., ">=1.28.0, &lt;1.30.0")
 in .kubernetes-version files to ensure compatibility.
 
 **Proposed Solution:**
@@ -274,7 +274,7 @@ func iv(v string) error {
    if err != nil {
        return fmt.Errorf("failed to download kubectl v%s: %w", version, err)
    }
-   
+
    // Bad: Generic error
    if err != nil {
        return err
@@ -291,7 +291,7 @@ func iv(v string) error {
    // Good: Explain why, not what
    // Normalize removes vendor suffixes to match official kubectl releases.
    // GKE, EKS, and AKS all add suffixes that don't exist in dl.k8s.io.
-   
+
    // Bad: Redundant comment
    // This function normalizes the version
    ```
@@ -322,7 +322,7 @@ func TestNormalizeVersion(t *testing.T) {
         },
         // More test cases...
     }
-    
+
     for _, tt := range tests {
         t.Run(tt.name, func(t *testing.T) {
             result := NormalizeVersion(tt.input)
@@ -399,11 +399,11 @@ go vet ./...
    ```go
    // cmd/newcommand.go
    package cmd
-   
+
    func init() {
        rootCmd.AddCommand(newCmd)
    }
-   
+
    var newCmd = &cobra.Command{
        Use:   "new",
        Short: "Short description",

@@ -356,12 +356,12 @@ Download takes very long or stalls.
    ```bash
    # Download manually
    curl -LO "https://dl.k8s.io/release/v1.28.0/bin/linux/amd64/kubectl"
-   
+
    # Install manually
    mkdir -p ~/.kuve/versions/v1.28.0
    mv kubectl ~/.kuve/versions/v1.28.0/
    chmod +x ~/.kuve/versions/v1.28.0/kubectl
-   
+
    # Switch to it
    kuve switch v1.28.0
    ```
@@ -450,10 +450,10 @@ Error: failed to detect cluster version: Unauthorized
    ```bash
    # AWS EKS
    aws eks update-kubeconfig --name <cluster-name>
-   
+
    # GCP GKE
    gcloud container clusters get-credentials <cluster-name>
-   
+
    # Azure AKS
    az aks get-credentials --name <cluster-name> --resource-group <rg>
    ```
@@ -512,7 +512,7 @@ pwd
    ```bash
    # Correct
    .kubernetes-version
-   
+
    # Incorrect
    kubernetes-version
    ```

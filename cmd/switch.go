@@ -13,7 +13,7 @@ var switchCmd = &cobra.Command{
 	Use:   "switch <version>",
 	Short: "Switch to a specific kubectl version",
 	Long: `Switch to a specific kubectl version. The version must be installed first.
-	
+
 Example:
   kuve switch v1.28.0
   kuve switch 1.28.0`,

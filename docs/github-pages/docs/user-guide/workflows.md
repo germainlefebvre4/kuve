@@ -99,14 +99,14 @@ echo "Testing manifests across kubectl versions..."
 for version in "${VERSIONS[@]}"; do
     echo ""
     echo "=== Testing with kubectl $version ==="
-    
+
     # Install and switch version
     kuve install "$version" 2>/dev/null
     kuve switch "$version"
-    
+
     # Validate manifests
     kubectl apply -f $MANIFESTS --dry-run=client
-    
+
     if [ $? -eq 0 ]; then
         echo "✓ Manifests valid with $version"
     else
@@ -129,22 +129,22 @@ jobs:
     strategy:
       matrix:
         kubectl-version: ['v1.27.0', 'v1.28.0', 'v1.29.0']
-    
+
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Install Kuve
         run: |
           wget https://github.com/germainlefebvre4/kuve/releases/latest/download/kuve-linux-amd64
           chmod +x kuve-linux-amd64
           sudo mv kuve-linux-amd64 /usr/local/bin/kuve
-      
+
       - name: Setup kubectl
         run: |
           export PATH="$HOME/.kuve/bin:$PATH"
           kuve install ${{ matrix.kubectl-version }}
           kuve switch ${{ matrix.kubectl-version }}
-      
+
       - name: Validate manifests
         run: kubectl apply -f manifests/ --dry-run=client
 ```
@@ -165,26 +165,26 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Install Kuve
         run: |
           curl -L https://github.com/germainlefebvre4/kuve/releases/latest/download/kuve-linux-amd64 -o kuve
           chmod +x kuve
           sudo mv kuve /usr/local/bin/
           echo "$HOME/.kuve/bin" >> $GITHUB_PATH
-      
+
       - name: Setup kubectl from version file
         run: kuve use
-      
+
       - name: Configure kubeconfig
         run: |
           mkdir -p $HOME/.kube
           echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
-      
+
       - name: Deploy
         run: |
           kubectl apply -f manifests/
@@ -230,11 +230,11 @@ echo "Migrating projects from $OLD_VERSION to $NEW_VERSION"
 # Find all .kubernetes-version files
 for file in $(find ~/projects -name .kubernetes-version); do
     current=$(cat "$file" | tr -d '[:space:]')
-    
+
     if [ "$current" = "$OLD_VERSION" ]; then
         echo "Updating: $file"
         echo "$NEW_VERSION" > "$file"
-        
+
         # Optionally commit the change
         dir=$(dirname "$file")
         (cd "$dir" && git add .kubernetes-version && \
@@ -283,13 +283,13 @@ PROJECTS=(
 for project in "${PROJECTS[@]}"; do
     echo "Setting up $project..."
     cd ~/projects
-    
+
     if [ ! -d "$project" ]; then
         git clone "https://github.com/company/$project.git"
     fi
-    
+
     cd "$project"
-    
+
     # Install required kubectl version
     if [ -f .kubernetes-version ]; then
         kuve use
