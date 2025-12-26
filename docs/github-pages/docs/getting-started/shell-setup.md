@@ -92,10 +92,10 @@ kuve <TAB>
    ```bash
    # Bash
    ls /etc/bash_completion.d/kuve
-   
+
    # Zsh
    ls ${fpath[1]}/_kuve
-   
+
    # Fish
    ls ~/.config/fish/completions/kuve.fish
    ```

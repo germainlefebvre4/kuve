@@ -18,7 +18,7 @@ var useCmd = &cobra.Command{
 	Use:   "use",
 	Short: "Use kubectl version from .kubernetes-version file or cluster",
 	Long: `Switch to the kubectl version specified in the .kubernetes-version file or detect from cluster.
-	
+
 This command searches for a .kubernetes-version file in the current directory
 and parent directories. If found, it switches to that version.
 
@@ -94,7 +94,7 @@ var initCmd = &cobra.Command{
 	Use:   "init [version]",
 	Short: "Create a .kubernetes-version file",
 	Long: `Create a .kubernetes-version file in the current directory.
-	
+
 If no version is specified, the current active version will be used.`,
 	Args: cobra.MaximumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {

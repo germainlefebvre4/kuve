@@ -73,7 +73,7 @@ docker-build:
 	docker build -t germainlefebvre4/kuve:dev --no-cache .
 	@echo "Docker image built: kuve:dev"
 
-# 
+#
 docker-build-push: docker-build
 	docker push germainlefebvre4/kuve:dev
 	@echo "Docker image pushed: germainlefebvre4/kuve:dev"

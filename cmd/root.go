@@ -15,7 +15,7 @@ var rootCmd = &cobra.Command{
 	Use:   "kuve",
 	Short: "Kubernetes Client Switcher",
 	Long: `Kuve is a CLI tool to easily switch versions of kubectl.
-	
+
 It helps you manage multiple kubectl versions on your system,
 allowing you to install, switch, and use different versions
 based on your needs or project requirements.`,

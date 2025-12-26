@@ -182,7 +182,7 @@ or
 Leading and trailing whitespace is ignored:
 
 ```
-  v1.29.0  
+  v1.29.0
 ```
 
 This is valid and will be read as `v1.29.0`.
@@ -259,18 +259,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Install Kuve
         run: |
           curl -L https://github.com/germainlefebvre4/kuve/releases/latest/download/kuve-linux-amd64 -o kuve
           chmod +x kuve
           sudo mv kuve /usr/local/bin/
-      
+
       - name: Setup kubectl version
         run: |
           export PATH="$HOME/.kuve/bin:$PATH"
           kuve use
-      
+
       - name: Deploy
         run: kubectl apply -f manifests/
 ```

@@ -211,7 +211,7 @@ The cluster detection feature works with kubectl versions that support:
      kubectl config use-context "$1"
      kuve use --from-cluster
    }
-   
+
    switch_cluster prod-cluster
    ```
 

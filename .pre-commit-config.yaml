@@ -15,11 +15,11 @@ repos:
       - id: hadolint-docker
   - repo: local
     hooks:
-      - id: mockery
-        name: mockery
-        entry: bash -c 'mockery'
-        language: system
-        verbose: false
+      # - id: mockery
+      #   name: mockery
+      #   entry: bash -c 'mockery'
+      #   language: system
+      #   verbose: false
       - id: cli-helper
         name: cli-helper
         entry: bash -c 'go run ./main.go > docs/github-pages/static/helper.out'

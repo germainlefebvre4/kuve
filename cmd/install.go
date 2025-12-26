@@ -12,7 +12,7 @@ var installCmd = &cobra.Command{
 	Use:   "install <version>",
 	Short: "Install a specific kubectl version",
 	Long: `Download and install a specific kubectl version.
-	
+
 Example:
   kuve install v1.28.0
   kuve install 1.28.0`,

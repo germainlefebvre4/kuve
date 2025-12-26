@@ -296,13 +296,13 @@ CONTEXTS=$(kubectl config get-contexts -o name)
 
 for context in $CONTEXTS; do
     echo "Processing cluster: $context"
-    
+
     # Switch context
     kubectl config use-context "$context"
-    
+
     # Detect and install version
     kuve use --from-cluster
-    
+
     # Verify
     echo "  kubectl version: $(kuve current)"
     echo ""
@@ -315,19 +315,19 @@ done
 # ~/.bashrc or ~/.zshrc
 function kswitch() {
     local cluster=$1
-    
+
     if [ -z "$cluster" ]; then
         echo "Available clusters:"
         kubectl config get-contexts -o name
         return 1
     fi
-    
+
     # Switch Kubernetes context
     kubectl config use-context "$cluster"
-    
+
     # Auto-switch kubectl version
     kuve use --from-cluster
-    
+
     echo "Switched to cluster: $cluster"
 }
 

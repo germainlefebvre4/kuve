@@ -260,16 +260,16 @@ func TestMyFunction(t *testing.T) {
             wantErr:  false,
         },
     }
-    
+
     for _, tt := range tests {
         t.Run(tt.name, func(t *testing.T) {
             result, err := MyFunction(tt.input)
-            
+
             if (err != nil) != tt.wantErr {
                 t.Errorf("MyFunction() error = %v, wantErr %v", err, tt.wantErr)
                 return
             }
-            
+
             if result != tt.expected {
                 t.Errorf("MyFunction() = %v, want %v", result, tt.expected)
             }

@@ -143,21 +143,21 @@ v1.27.5+k3s1          → v1.27.0
 func NormalizeVersion(version string) string {
     // Remove 'v' prefix if present
     version = strings.TrimPrefix(version, "v")
-    
+
     // Split on '-' or '+'
     parts := strings.FieldsFunc(version, func(r rune) bool {
         return r == '-' || r == '+'
     })
-    
+
     // Get base version (major.minor.patch)
     base := parts[0]
-    
+
     // Extract major.minor
     versionParts := strings.Split(base, ".")
     if len(versionParts) >= 2 {
         return fmt.Sprintf("v%s.%s.0", versionParts[0], versionParts[1])
     }
-    
+
     return "v" + base
 }
 ```
@@ -213,11 +213,11 @@ CLUSTERS=(
 
 for cluster_info in "${CLUSTERS[@]}"; do
     context="${cluster_info%%:*}"
-    
+
     echo "Testing on $context..."
     kubectl config use-context "$context"
     kuve use --from-cluster
-    
+
     kubectl apply -f manifests/ --dry-run=client
 done
 ```
