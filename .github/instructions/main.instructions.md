@@ -27,3 +27,7 @@ CLI to easily switch version of kubectl.
 - README.md file in the root of the repository
 - Documentation directory: docs/
 - Do not write documentation in root directory except README.md
+
+## Rules
+
+- Do not use emojis in the documentation
