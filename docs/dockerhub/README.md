@@ -8,7 +8,7 @@
 
 # Supported tags and respective Dockerfile links
 
-* [`latest`, `v0`, `v0.2`, `v0.2.0`](https://github.com/germainlefebvre4/kuve/blob/v0.2.0/Dockerfile)
+* [`latest`, `v0`, `v0.2`, `v0.2.1`](https://github.com/germainlefebvre4/kuve/blob/v0.2.1/Dockerfile)
 
 # Quick reference (cont.)
 

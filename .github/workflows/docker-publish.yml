@@ -103,6 +103,11 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
+      - name: Update DockerHub README tags
+        run: |
+          chmod +x scripts/update-dockerhub-readme.sh
+          ./scripts/update-dockerhub-readme.sh
+
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v4
         with:
