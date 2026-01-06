@@ -43,5 +43,5 @@ jobs:
 
       - name: Test with kuve
         run: |
-          ./kuve --version
-          ./kuve --help
+          ./bin/kuve --version
+          ./bin/kuve --help
