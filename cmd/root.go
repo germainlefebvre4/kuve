@@ -8,7 +8,9 @@ import (
 )
 
 var (
-	appVersion = "dev"
+	appVersion  = "dev"
+	buildTime   = "unknown"
+	buildCommit = "unknown"
 )
 
 var rootCmd = &cobra.Command{
@@ -31,6 +33,10 @@ func Execute() {
 }
 
 func init() {
+	// Custom version template to include build time
+	versionTemplate := fmt.Sprintf("kuve\nVersion: %s\nCommit: %s\nBuild time: %s\n", appVersion, buildCommit, buildTime)
+	rootCmd.SetVersionTemplate(versionTemplate)
+
 	// Global flags can be added here
 	rootCmd.PersistentFlags().BoolP("verbose", "v", false, "verbose output")
 }

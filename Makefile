@@ -2,15 +2,35 @@
 
 # Variables
 BINARY_NAME=kuve
-INSTALL_PATH=/usr/local/bin
+CMD_DIR := cmd
+CMD_MAIN_FILE := main.go
+BUILD_DIR := bin
 GO=go
-VERSION?=dev
+GOFLAGS := -v
+LDFLAGS := -s -w
+INSTALL_PATH=/usr/local/bin
+
+# Go commands
+GOCMD := $(GO)
+GOBUILD := $(GOCMD) build
+GOCLEAN := $(GOCMD) clean
+GOTEST := $(GOCMD) test
+GOGET := $(GOCMD) get
+GOFMT := $(GOCMD) fmt
+GOMOD := $(GOCMD) mod
+
+# Build variables
+VERSION ?= $(shell git describe --tags 2>/dev/null || echo "dev")
+COMMIT := $(shell git rev-parse --short HEAD 2>/dev/null || echo "unknown")
+BUILD_TIME := $(shell date -u '+%Y-%m-%d %H:%M:%S')
+BUILD_LDFLAGS := $(LDFLAGS) -X 'cmd.appVersion=$(VERSION)' -X 'cmd.buildCommit=$(COMMIT)' -X 'cmd.buildTime=$(BUILD_TIME)'
 
 # Build the application
 build:
-	@echo "Building $(BINARY_NAME)..."
-	$(GO) build -ldflags="-X 'github.com/germainlefebvre4/kuve/cmd.appVersion=$(VERSION)'" -o $(BINARY_NAME) main.go
-	@echo "Build complete: $(BINARY_NAME)"
+	@echo "Building $(BUILD_DIR)/$(BINARY_NAME)..."
+	$(GO) build -ldflags="$(BUILD_LDFLAGS)" -o $(BUILD_DIR)/$(BINARY_NAME) $(CMD_MAIN_FILE)
+	@chmod +x $(BUILD_DIR)/$(BINARY_NAME)
+	@echo "Build complete: $(BUILD_DIR)/$(BINARY_NAME)"
 
 # Install the binary to system path
 install: build
@@ -26,14 +46,15 @@ test:
 # Run tests with coverage
 test-coverage:
 	@echo "Running tests with coverage..."
-	$(GO) test -v -coverprofile=coverage.out ./...
-	$(GO) tool cover -html=coverage.out -o coverage.html
+	$(GOTEST) test -v -coverprofile=coverage.out ./...
+	$(GOCMD) tool cover -html=coverage.out -o coverage.html
 	@echo "Coverage report generated: coverage.html"
 
 # Clean build artifacts
 clean:
 	@echo "Cleaning..."
-	@rm -f $(BINARY_NAME)
+	$(GOCLEAN)
+	@rm -f $(BUILD_DIR)
 	@rm -f coverage.out coverage.html
 	@echo "Clean complete"
 
