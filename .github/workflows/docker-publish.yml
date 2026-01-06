@@ -34,6 +34,9 @@ jobs:
         run: |
           echo "VERSION_ONE_DIGIT=$(echo ${{ inputs.version }} | cut -d '.' -f1)" >> $GITHUB_OUTPUT
           echo "VERSION_TWO_DIGIT=$(echo ${{ inputs.version }} | cut -d '.' -f1-2)" >> $GITHUB_OUTPUT
+          echo "VERSION_THREE_DIGIT=$(echo ${{ inputs.version }} | cut -d '.' -f1-3)" >> $GITHUB_OUTPUT
+          echo "VERSION_FULL=$(echo ${{ inputs.version }} )" >> $GITHUB_OUTPUT
+          echo "VERSION_NO_V=$(echo ${{ inputs.version }} | sed 's/^v//')" >> $GITHUB_OUTPUT
 
       - name: Set up Docker
         uses: docker/setup-docker-action@v4
@@ -78,13 +81,15 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           outputs: type=image,"name=${{ env.DOCKERHUB_REPO }},${{ env.GHCR_REPO }}",name-canonical=true,push=true
           build-args: |
-            KUVE_VERSION=${{ inputs.version }}
+            KUVE_VERSION=${{ steps.versions.outputs.VERSION_NO_V }}
           tags: |
-            ${{ env.DOCKERHUB_REPO }}:${{ inputs.version }}
+            ${{ env.DOCKERHUB_REPO }}:${{ steps.versions.outputs.VERSION_FULL }}
+            ${{ env.DOCKERHUB_REPO }}:${{ steps.versions.outputs.VERSION_THREE_DIGIT }}
             ${{ env.DOCKERHUB_REPO }}:${{ steps.versions.outputs.VERSION_TWO_DIGIT }}
             ${{ env.DOCKERHUB_REPO }}:${{ steps.versions.outputs.VERSION_ONE_DIGIT }}
             ${{ env.DOCKERHUB_REPO }}:latest
-            ${{ env.GHCR_REPO }}:${{ inputs.version }}
+            ${{ env.GHCR_REPO }}:${{ steps.versions.outputs.VERSION_FULL }}
+            ${{ env.GHCR_REPO }}:${{ steps.versions.outputs.VERSION_THREE_DIGIT }}
             ${{ env.GHCR_REPO }}:${{ steps.versions.outputs.VERSION_TWO_DIGIT }}
             ${{ env.GHCR_REPO }}:${{ steps.versions.outputs.VERSION_ONE_DIGIT }}
             ${{ env.GHCR_REPO }}:latest
